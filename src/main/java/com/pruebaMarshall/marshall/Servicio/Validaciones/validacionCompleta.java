@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import com.pruebaMarshall.marshall.Modelo.Comprobante;
 import com.pruebaMarshall.marshall.Modelo.MarshallCFDI;
+
 import com.pruebaMarshall.marshall.Servicio.xmlServicio;
 
 @Service
@@ -62,9 +63,12 @@ public class validacionCompleta {
     private valConceptoTrasladosBase valConceptoTrasladosBase;
     @Autowired
     private MarshallCFDI marshallCFDI;
+ 
+ 
     private xmlServicio xmlServicio;
     private List<Comprobante> comprobantes;
-    
+
+   
     public validacionCompleta(xmlServicio xmlServicio) {
         this.xmlServicio = xmlServicio;
         this.comprobantes = xmlServicio.devolverDatosXml();
@@ -72,8 +76,8 @@ public class validacionCompleta {
 
     public Map<String, Object> validar() throws IllegalArgumentException, IllegalAccessException {
         Map<String, Object> mapa = new LinkedHashMap<>();
+        
         System.out.println(valConceptoTrasladosBase.recuperarTrasladosBase());
-     
         for (int i = 0; i < marshallCFDI.obtenerNombres().size(); i++) {
             Map<String, Object> mapaValidacion = new LinkedHashMap<>();
             mapaValidacion.put("Exportacion", valExportacion.validarExportacion().get(i));
@@ -98,7 +102,7 @@ public class validacionCompleta {
             mapaValidacion.put("UsoCFDI", valCfdiUsoCfdi.validarUsoCfdi().get(i));
             mapaValidacion.put("Valor Unitario", valConceptosValorUnitario.validarValorUnitario().get(i));
             mapaValidacion.put("ObjetoImp", valConceptosObjetoImp.agregarMapa().get(i));
-          
+            mapaValidacion.put("Base", valConceptoTrasladosBase.recuperarTrasladosBase().get(i));
             mapa.put(marshallCFDI.obtenerNombres().get(i), mapaValidacion);
         }
         return mapa;

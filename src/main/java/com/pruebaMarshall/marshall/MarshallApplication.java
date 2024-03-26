@@ -21,7 +21,7 @@ public class MarshallApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(MarshallApplication.class, args);
-		xmlServicio xmlServicio = new xmlServicio();
+		
 		/*MarshallCFDI marshallCFDI = new MarshallCFDI(xmlServicio);
 		Comprobante comprobante = new Comprobante(marshallCFDI.obtenerCertificado(),
                 marshallCFDI.obtenerNoCertificado(), marshallCFDI.obtenerSello(), marshallCFDI.obtenerExportacion(),
